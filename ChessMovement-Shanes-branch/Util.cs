@@ -9,7 +9,7 @@ using ChessMovement.Helpers;
 
 namespace ChessMovement
 {
-    class Util
+    public class Util
     {
 
 
@@ -158,7 +158,6 @@ namespace ChessMovement
                 };
                 PiecePlace(LightPawn.x, LightPawn.y, LightPawn);
             }
-            PrintBoard(null);
         }
 
         public void PawnSetup()
@@ -210,7 +209,6 @@ namespace ChessMovement
 
 
         }
-
 
         public void FischerRandomSetup()
         {
@@ -600,14 +598,13 @@ namespace ChessMovement
             {
                 Console.WriteLine(message);
             }
-            Console.ReadLine();
-            //allvalidmoves(board);
         }
 
         public Piece[,] GetBoard()
         {
             return board;
         }
+
 
         public bool ArgCheck(string[] args) //Checks to see if argumetns have been passed through and are valid
         {

@@ -1,5 +1,6 @@
-﻿using CSC160_ConsoleMenu;
-
+﻿using ChessMovement.Helpers;
+using CSC160_ConsoleMenu;
+using System;
 
 namespace ChessMovement
 {
@@ -33,9 +34,29 @@ namespace ChessMovement
                     util.PawnSetup();
                     break;
             }
-
-            util.PrintBoard(null);
+            Start();
         }
 
+        private static void Start()
+        {
+            bool stop = true;
+            do
+            {
+                util.PrintBoard("Press Enter to Continue...");
+                string input = CIO.PromptForInput("Enter starting location followed by end location to move\r\nExample: A1 A3\r\n\r\nEnter 0 to stop", false);
+                if (!input.Equals(0))
+                {
+                    try
+                    {
+                        util.ProcessInput(input);
+                    }
+                    catch (ArgumentException)
+                    {
+                        Console.WriteLine("Format Your String correctly please");
+                    }
+                }
+                Console.Clear();
+            } while (stop);
+        }
     }
 }
