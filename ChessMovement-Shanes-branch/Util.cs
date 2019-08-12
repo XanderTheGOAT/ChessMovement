@@ -271,125 +271,103 @@ namespace ChessMovement
                                             // while (gameEnd == false)
                                             //{
 
-        public void FileReader(string input) //Reads the file and either place or move pieces as written.
+        public void ProcessInput(string input) //Reads the file and either place or move pieces as written.
         {
-            string Line = null;
             string Origin;
             string placed;
             bool checkMate = false;
             string movePiece = ("^[a-h][1-8] [a-h][1-8]\\*?$");     //Rexex pattern that will only accept [x axis location][y axis location]
                                                                     //[location on the x axis][location on y axis]
-
-            string commentStart = ("\\/\\*\\*"); //pattern to see if the line contains a comment string
-            string commentEnd = ("\\*\\*\\/");   // pattern to see if the line becomes uncommented
-            bool comment = false;
             Match MoveMatch;
-            Match commented;
-            Match uncommented;
 
             bool captured = false;
-            commented = Regex.Match(Line, commentStart);
-            if (commented.Success) //Checks if the line is commented
+            MoveMatch = Regex.Match(input, movePiece, RegexOptions.IgnoreCase);
+            if (MoveMatch.Success)
             {
-                comment = true;
-            }
-            if (!comment)
-            {
-                MoveMatch = Regex.Match(Line, movePiece, RegexOptions.IgnoreCase);
                 //Previously, this part of the file read commands for placement of pieces. Since this program is supposed to be without said lines, It was removed
-                if (MoveMatch.Success) //Checking for a movement string
+                captured = false;
+                //Splits the line in order to gather data on the starting and ending point
+                Origin = input.Split(' ')[0];
+                placed = input.Split(' ')[1];
+                //Checks the end of the line to see if a piece is captured
+                if (placed.Substring(placed.Length - 1).Equals("*"))
                 {
-                    captured = false;
-                    //Splits the line in order to gather data on the starting and ending point
-                    Origin = Line.Split(' ')[0];
-                    placed = Line.Split(' ')[1];
-                    //Checks the end of the line to see if a piece is captured
-                    if (placed.Substring(placed.Length - 1).Equals("*"))
-                    {
-                        captured = true;
-                    }
-                    //If it didn't capture a piece, it simply moves the piece from point a to point b, using methods previously talked about
-                    if (!captured)
-                    {
-                        int StartX = char.ToUpper(Origin.First<char>()) - 65; //This is set to 65 to make logic easier so that a is equal to 0 instead of one
-                        int StartY = int.Parse(Origin.Substring(Origin.Length - 1));
-                        int EndX = char.ToUpper(placed.First<char>()) - 65;
-                        int EndY = int.Parse(placed.Substring(placed.Length - 1));
+                    captured = true;
+                }
+                //If it didn't capture a piece, it simply moves the piece from point a to point b, using methods previously talked about
+                if (!captured)
+                {
+                    int StartX = char.ToUpper(Origin.First<char>()) - 65; //This is set to 65 to make logic easier so that a is equal to 0 instead of one
+                    int StartY = int.Parse(Origin.Substring(Origin.Length - 1));
+                    int EndX = char.ToUpper(placed.First<char>()) - 65;
+                    int EndY = int.Parse(placed.Substring(placed.Length - 1));
 
-                        Piece p = board[StartX, 8 - StartY];
-                        if (p == null)
+                    Piece p = board[StartX, 8 - StartY];
+                    if (p == null)
+                    {
+                        string atemp = ("The space at those cordinates on the board is null");
+                        PrintBoard(atemp);
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        if (lightPlayerTurn == true && p.color == 'l')
                         {
-                            string atemp = ("The space at those cordinates on the board is null");
-                            PrintBoard(atemp);
-                            Console.ReadLine();
+                            //lightplayer
+                            PieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, input, p.color);
+                        }
+                        else if (lightPlayerTurn == false && p.color == 'd')
+                        {
+                            PieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, input, p.color);
+                            //darkplayer
                         }
                         else
                         {
-                            if (lightPlayerTurn == true && p.color == 'l')
-                            {
-                                //lightplayer
-                                PieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, Line, p.color);
-                            }
-                            else if (lightPlayerTurn == false && p.color == 'd')
-                            {
-                                PieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, Line, p.color);
-                                //darkplayer
-                            }
-                            else
-                            {
-                                string temp = ("Invalid move: It is currently the other players turn.");
-                                PrintBoard(temp);
-                                Console.ReadKey();
-                            }
+                            string temp = ("Invalid move: It is currently the other players turn.");
+                            PrintBoard(temp);
+                            Console.ReadKey();
                         }
                     }
-                    //If a piece was captured, the parsing for the ending y axis point is moddified to be accepted as the * at the end could cause issues
-                    else if (captured)
+                }
+                //If a piece was captured, the parsing for the ending y axis point is moddified to be accepted as the * at the end could cause issues
+                else if (captured)
+                {
+                    int StartX = char.ToUpper(Origin.First<char>()) - 65;
+                    int StartY = int.Parse(Origin.Substring(Origin.Length - 1));
+                    int EndX = char.ToUpper(placed.First<char>()) - 65;
+                    int EndY = int.Parse(placed.Substring(placed.Length - 2, placed.Length - 2));
+                    //game.pieceMove(StartX, 8 - StartY, EndX, 8 - EndY);
+                    Piece p = board[StartX, 8 - StartY];
+                    if (p == null)
                     {
-                        int StartX = char.ToUpper(Origin.First<char>()) - 65;
-                        int StartY = int.Parse(Origin.Substring(Origin.Length - 1));
-                        int EndX = char.ToUpper(placed.First<char>()) - 65;
-                        int EndY = int.Parse(placed.Substring(placed.Length - 2, placed.Length - 2));
-                        //game.pieceMove(StartX, 8 - StartY, EndX, 8 - EndY);
-                        Piece p = board[StartX, 8 - StartY];
-                        if (p == null)
+                        Console.WriteLine("The space at those cordinates on the board is null");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        if (lightPlayerTurn == true && p.color == 'l')
                         {
-                            Console.WriteLine("The space at those cordinates on the board is null");
-                            Console.ReadLine();
+                            //lightplayer
+                            PieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, input, p.color);
+                        }
+                        else if (lightPlayerTurn == false && p.color == 'd')
+                        {
+                            PieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, input, p.color);
+                            //darkplayer
                         }
                         else
                         {
-                            if (lightPlayerTurn == true && p.color == 'l')
-                            {
-                                //lightplayer
-                                PieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, Line, p.color);
-                            }
-                            else if (lightPlayerTurn == false && p.color == 'd')
-                            {
-                                PieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, Line, p.color);
-                                //darkplayer
-                            }
-                            else
-                            {
-                                string temp = ("Invalid move: It is currently the other players turn.");
-                                PrintBoard(temp);
-                                Console.ReadKey();
-                            }
+                            string temp = ("Invalid move: It is currently the other players turn.");
+                            PrintBoard(temp);
+                            Console.ReadKey();
                         }
-
                     }
+
                 }
                 else
                 {
-                    Console.WriteLine($"Invalid Line: {Line}");
+                    Console.WriteLine($"Invalid Line: {input}");
                 }
-
-
-            }
-            uncommented = Regex.Match(Line, commentEnd);
-            if (uncommented.Success) //Checks if a line becomes uncommented
-            {
-                comment = false;
             }
             if (checkMate == true)
             {

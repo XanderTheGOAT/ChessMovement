@@ -12,7 +12,7 @@ namespace ChessMovement
             if (util.ArgCheck(args)) //Checks if an argument is present and if it leads to a valid file
             {
                 util.GeneralSetup();
-                util.FileReader(args[0]);
+                util.ProcessInput(args[0]);
             }
         }
 
