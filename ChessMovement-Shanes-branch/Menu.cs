@@ -18,7 +18,7 @@ namespace ChessMovement
 
         public static void NewGame()
         {
-            string[] options = { "Standard", "Chess 960" };
+            string[] options = { "Standard", "Chess 960", "Pawn Setup" };
 
             int option = CIO.PromptForMenuSelection(options, true);
             switch (option)
@@ -27,8 +27,14 @@ namespace ChessMovement
                     util.GeneralSetup();
                     break;
                 case 2:
+                    util.FischerRandomSetup();
+                    break;
+                case 3:
+                    util.PawnSetup();
                     break;
             }
+
+            util.PrintBoard(null);
         }
 
     }

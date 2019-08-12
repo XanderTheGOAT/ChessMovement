@@ -17,10 +17,10 @@ namespace ChessMovement
         public static Piece[,] board = new Piece[8, 8];
 
 
-
         public void GeneralSetup() // Creates a Piece for every piece a chess board is supposed to have with pawns commented out for later. For every piece created, it places it on the board.
         {
-            //Let this set the board at start, since the file reading will only do piece movements. 
+
+            //Dark Pieces
             Piece DarkKing = new King();
             DarkKing.x = 4;
             DarkKing.y = 0;
@@ -78,80 +78,19 @@ namespace ChessMovement
             DarkBishop2.color = 'd';
             PiecePlace(DarkBishop2.x, DarkBishop2.y, DarkBishop2);
 
-            //---------------------------
-            Piece DarkPawn1 = new Pawn()
+            for (int i = 0; i < 8; i++)
             {
-                x = 0,
-                y = 1,
-                name = 'P',
-                color = 'd'
-            };
-            PiecePlace(DarkPawn1.x, DarkPawn1.y, DarkPawn1);
+                Piece DarkPawn = new Pawn()
+                {
+                    x = i,
+                    y = 1,
+                    name = 'P',
+                    color = 'd'
+                };
+                PiecePlace(DarkPawn.x, DarkPawn.y, DarkPawn);
+            }
 
-            Piece DarkPawn2 = new Pawn
-            {
-                x = 1,
-                y = 1,
-                name = 'P',
-                color = 'd'
-            };
-            PiecePlace(DarkPawn2.x, DarkPawn2.y, DarkPawn2);
-
-            Piece DarkPawn3 = new Pawn()
-            {
-                x = 2,
-                y = 1,
-                name = 'P',
-                color = 'd'
-            };
-            PiecePlace(DarkPawn3.x, DarkPawn3.y, DarkPawn3);
-
-            Piece DarkPawn4 = new Pawn
-            {
-                x = 3,
-                y = 1,
-                name = 'P',
-                color = 'd'
-            };
-            PiecePlace(DarkPawn4.x, DarkPawn4.y, DarkPawn4);
-
-            Piece DarkPawn5 = new Pawn()
-            {
-                x = 4,
-                y = 1,
-                name = 'P',
-                color = 'd'
-            };
-            PiecePlace(DarkPawn5.x, DarkPawn5.y, DarkPawn5);
-
-            Piece DarkPawn6 = new Pawn()
-            {
-                x = 5,
-                y = 1,
-                name = 'P',
-                color = 'd'
-            };
-            PiecePlace(DarkPawn6.x, DarkPawn6.y, DarkPawn6);
-
-            Piece DarkPawn7 = new Pawn()
-            {
-                x = 6,
-                y = 1,
-                name = 'P',
-                color = 'd'
-            };
-            PiecePlace(DarkPawn7.x, DarkPawn7.y, DarkPawn7);
-
-            Piece DarkPawn8 = new Pawn()
-            {
-                x = 7,
-                y = 1,
-                name = 'P',
-                color = 'd'
-            };
-            PiecePlace(DarkPawn8.x, DarkPawn8.y, DarkPawn8);
-
-            //------------------------
+            //Light Pieces
             Piece LightKing = new King();
             LightKing.x = 4;
             LightKing.y = 7;
@@ -200,83 +139,80 @@ namespace ChessMovement
             LightBishop1.name = 'b';
             LightBishop1.color = 'l';
             PiecePlace(LightBishop1.x, LightBishop1.y, LightBishop1);
-
+            
             Piece LightBishop2 = new Bishop();
             LightBishop2.x = 5;
             LightBishop2.y = 7;
             LightBishop2.name = 'b';
             LightBishop2.color = 'l';
             PiecePlace(LightBishop2.x, LightBishop2.y, LightBishop2);
-
-            //-------------------------
-            Piece LightPawn1 = new Pawn()
+            for (int i = 0; i < 8; i++)
             {
-                x = 0,
-                y = 6,
-                name = 'p',
-                color = 'l'
-            };
-            PiecePlace(LightPawn1.x, LightPawn1.y, LightPawn1);
-            Piece LightPawn2 = new Pawn()
-            {
-                x = 1,
-                y = 6,
-                name = 'p',
-                color = 'l'
-            };
-            PiecePlace(LightPawn2.x, LightPawn2.y, LightPawn2);
-
-            Piece LightPawn3 = new Pawn()
-            {
-                x = 2,
-                y = 6,
-                name = 'p',
-                color = 'l'
-            };
-            PiecePlace(LightPawn3.x, LightPawn3.y, LightPawn3);
-            Piece LightPawn4 = new Pawn
-            {
-                x = 3,
-                y = 6,
-                name = 'p',
-                color = 'l'
-            };
-            PiecePlace(LightPawn4.x, LightPawn4.y, LightPawn4);
-            Piece LightPawn5 = new Pawn()
-            {
-                x = 4,
-                y = 6,
-                name = 'p',
-                color = 'l'
-            };
-            PiecePlace(LightPawn5.x, LightPawn5.y, LightPawn5);
-            Piece LightPawn6 = new Pawn()
-            {
-                x = 5,
-                y = 6,
-                name = 'p',
-                color = 'l'
-            };
-            PiecePlace(LightPawn6.x, LightPawn6.y, LightPawn6);
-
-            Piece LightPawn7 = new Pawn()
-            {
-                x = 6,
-                y = 6,
-                name = 'p',
-                color = 'l'
-            };
-            PiecePlace(LightPawn7.x, LightPawn7.y, LightPawn7);
-
-            Piece LightPawn8 = new Pawn()
-            {
-                x = 7,
-                y = 6,
-                name = 'p',
-                color = 'l'
-            };
-            PiecePlace(LightPawn8.x, LightPawn8.y, LightPawn8);
+                Piece LightPawn = new Pawn()
+                {
+                    x = i,
+                    y = 6,
+                    name = 'p',
+                    color = 'l'
+                };
+                PiecePlace(LightPawn.x, LightPawn.y, LightPawn);
+            }
             PrintBoard(null);
+        }
+
+        public void PawnSetup()
+        {
+            //-------------------------
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 2; j++)
+                {
+                    Piece LightPawn = new Pawn()
+                    {
+                        x = i,
+                        y = j + 6,
+                        name = 'p',
+                        color = 'l'
+                    };
+                    PiecePlace(LightPawn.x, LightPawn.y, LightPawn);
+                }
+            }
+            Piece LightKing = new King();
+            LightKing.x = 4;
+            LightKing.y = 7;
+            LightKing.name = 'k';
+            LightKing.color = 'l';
+            PiecePlace(LightKing.x, LightKing.y, LightKing);
+
+
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 2; j++)
+                {
+                    Piece DarkPawn = new Pawn()
+                    {
+                        x = i,
+                        y = j,
+                        name = 'P',
+                        color = 'd'
+                    };
+                    PiecePlace(DarkPawn.x, DarkPawn.y, DarkPawn);
+                }
+            }
+            Piece DarkKing = new King();
+            DarkKing.x = 4;
+            DarkKing.y = 0;
+            DarkKing.name = 'K';
+            DarkKing.color = 'd';
+            PiecePlace(DarkKing.x, DarkKing.y, DarkKing);
+
+
+        }
+
+        public void FischerRandomSetup()
+        {
+
         }
 
         public static int GetAbsValue(int num1, int num2) // A method used to get the absolute value of two numbers to make logic simplier.
@@ -331,16 +267,13 @@ namespace ChessMovement
             }
         }
 
-
-
-
         static bool lightPlayerTurn = true; // If true then it is light players turn
                                             // while (gameEnd == false)
                                             //{
 
         public void FileReader(string input) //Reads the file and either place or move pieces as written.
         {
-            string Line;
+            string Line = null;
             string Origin;
             string placed;
             bool checkMate = false;
@@ -505,6 +438,7 @@ namespace ChessMovement
                ;
             }
         }
+
         public void PrintBoard(string message) //Prints the board
         {
             //Loop to go through the y axis
@@ -540,10 +474,12 @@ namespace ChessMovement
             Console.ReadLine();
             //allvalidmoves(board);
         }
+
         public Piece[,] GetBoard()
         {
             return board;
         }
+
         public bool ArgCheck(string[] args) //Checks to see if argumetns have been passed through and are valid
         {
             bool valid = false;
