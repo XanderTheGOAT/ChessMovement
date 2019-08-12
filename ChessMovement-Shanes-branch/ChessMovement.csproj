@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CIO">
-      <HintPath>..\..\..\..\..\Downloads\CIO.dll</HintPath>
+      <HintPath>ImportantLibraries\CIO.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

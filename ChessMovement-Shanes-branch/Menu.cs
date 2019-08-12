@@ -1,27 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CSC160_ConsoleMenu;
+
 
 namespace ChessMovement
 {
-    class Menu
+    internal class Menu
     {
-        private static Util util = new Util(); // Sets up the Util class so we can call our needed methodd
+        private static readonly Util util = new Util(); // Sets up the Util class so we can call our needed methodd
 
-        public static void LoadGame(String[] args)
+        public static void LoadGame(string[] args)
         {
             if (util.ArgCheck(args)) //Checks if an argument is present and if it leads to a valid file
             {
-                util.setupBoard();
+                util.GeneralSetup();
                 util.FileReader(args[0]);
             }
         }
 
         public static void NewGame()
         {
-            util.setupBoard();
+            string[] options = { "Standard", "Chess 960" };
+
+            int option = CIO.PromptForMenuSelection(options, true);
+            switch (option)
+            {
+                case 1:
+                    util.GeneralSetup();
+                    break;
+                case 2:
+                    break;
+            }
         }
 
     }
