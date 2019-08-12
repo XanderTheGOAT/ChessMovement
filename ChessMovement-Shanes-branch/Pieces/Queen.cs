@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChessMovement
 {
-    class Queen : Piece
+    public class Queen : Piece
     {
 
         public override bool IsValidTest(Piece p, int endX, int endY)
