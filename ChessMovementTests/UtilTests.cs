@@ -74,17 +74,17 @@ namespace ChessMovement.Tests
             util.GeneralSetup();
 
             util.ProcessInput("a2 a3");
-            Assert.IsTrue(util.lastPieceMovedColor == 'l');
+            Assert.IsTrue(!util.lightPlayerTurn);
         }
 
         [TestMethod()]
-        public void CheckLastPlayerPaysForBeingADumbassTest()
+        public void CheckLastPlayerMovementDoesNotChangeOnInvalidInput()
         {
             Util util = new Util();
             util.GeneralSetup();
 
             util.ProcessInput("a2 a5");
-            Assert.IsTrue(util.lastPieceMovedColor == 'l');
+            Assert.IsTrue(util.lightPlayerTurn);
         }
     }
 }

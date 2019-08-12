@@ -416,7 +416,7 @@ namespace ChessMovement
             }
         }
 
-        static bool lightPlayerTurn = true; // If true then it is light players turn
+        public bool lightPlayerTurn = true; // If true then it is light players turn
                                             // while (gameEnd == false)
                                             //{
 
@@ -494,12 +494,12 @@ namespace ChessMovement
                     }
                     else
                     {
-                        if (lightPlayerTurn == true && p.color == 'l')
+                        if (lightPlayerTurn && p.color == 'l')
                         {
                             //lightplayer
                             PieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, input, p.color);
                         }
-                        else if (lightPlayerTurn == false && p.color == 'd')
+                        else if (!lightPlayerTurn && p.color == 'd')
                         {
                             PieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, input, p.color);
                             //darkplayer
@@ -531,21 +531,13 @@ namespace ChessMovement
 
         public void PieceMove(int startX, int startY, int endX, int endY, Piece piece, string Move, char Color) //Moves the Piece
         {
-            lastPieceMovedColor = Color;
             //Checks if the location has a piece to move
             if (board[startX, startY] != null)
             {
 
                 if (piece.IsValidTest(piece, endX, endY))
                 {
-                    if (CheckLastPlayerMovement() == 0)
-                    {
-                        lightPlayerTurn = true;
-                    }
-                    else
-                    {
-                        lightPlayerTurn = false;
-                    }
+                    lightPlayerTurn = !lightPlayerTurn;
                     board[endX, endY] = board[startX, startY]; //changes the value at the end location to what the starting location's value was
                     piece.x = endX;
                     piece.y = endY;
@@ -625,20 +617,5 @@ namespace ChessMovement
 
             return valid;
         }
-
-        //if 0 is returned then light player's turn
-        //if 1 is returned then dark player's turn
-        public int CheckLastPlayerMovement()
-        {
-            if (lastPieceMovedColor == 'd')
-            {
-                return 0;
-            }
-            else
-            {
-                return 1;
-            }
-        }
-
     }
 }
