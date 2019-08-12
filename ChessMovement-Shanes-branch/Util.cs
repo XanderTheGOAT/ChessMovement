@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
+using ChessMovement.Helpers;
 
 namespace ChessMovement
 {
@@ -139,7 +140,7 @@ namespace ChessMovement
             LightBishop1.name = 'b';
             LightBishop1.color = 'l';
             PiecePlace(LightBishop1.x, LightBishop1.y, LightBishop1);
-            
+
             Piece LightBishop2 = new Bishop();
             LightBishop2.x = 5;
             LightBishop2.y = 7;
@@ -210,9 +211,159 @@ namespace ChessMovement
 
         }
 
+
         public void FischerRandomSetup()
         {
+            List<int> numbers = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7 };
 
+            //Dark Pieces
+            Rook DarkRook1 = new Rook();
+            DarkRook1.x = Randomizer.ChooseNumberThenRemove(ref numbers);
+            DarkRook1.y = 0;
+            DarkRook1.name = 'R';
+            DarkRook1.color = 'd';
+
+            Rook DarkRook2 = new Rook();
+            DarkRook2.x = Randomizer.ChooseNumberThenRemove(ref numbers);
+            DarkRook2.y = 0;
+            DarkRook2.name = 'R';
+            DarkRook2.color = 'd';
+
+            King DarkKing = new King();
+            DarkKing.x = Randomizer.ChooseNumberThenRemove(ref numbers);
+            DarkKing.y = 0;
+            DarkKing.name = 'K';
+            DarkKing.color = 'd';
+
+            if (DarkKing.x < DarkRook1.x && DarkKing.x < DarkRook2.x)
+            {
+                Piece middle = DarkRook1.x < DarkRook2.x ? ref DarkRook1 : ref DarkRook2;
+                (DarkKing.x, middle.x) = (middle.x, DarkKing.x);
+            }
+            else if (DarkKing.x > DarkRook1.x && DarkKing.x > DarkRook2.x)
+            {
+                Piece middle = DarkRook1.x < DarkRook2.x ? ref DarkRook2 : ref DarkRook1;
+                (DarkKing.x, middle.x) = (middle.x, DarkKing.x);
+            }
+
+            PiecePlace(DarkRook1.x, DarkRook1.y, DarkRook1);
+            PiecePlace(DarkRook2.x, DarkRook2.y, DarkRook2);
+            PiecePlace(DarkKing.x, DarkKing.y, DarkKing);
+
+            Piece DarkQueen = new Queen();
+            DarkQueen.x = Randomizer.ChooseNumberThenRemove(ref numbers);
+            DarkQueen.y = 0;
+            DarkQueen.name = 'Q';
+            DarkQueen.color = 'd';
+            PiecePlace(DarkQueen.x, DarkQueen.y, DarkQueen);
+
+            Piece DarkKnight1 = new Knight();
+            DarkKnight1.x = Randomizer.ChooseNumberThenRemove(ref numbers);
+            DarkKnight1.y = 0;
+            DarkKnight1.name = 'N';
+            DarkKnight1.color = 'd';
+            PiecePlace(DarkKnight1.x, DarkKnight1.y, DarkKnight1);
+
+            Piece DarkKnight2 = new Knight();
+            DarkKnight2.x = Randomizer.ChooseNumberThenRemove(ref numbers);
+            DarkKnight2.y = 0;
+            DarkKnight2.name = 'N';
+            DarkKnight2.color = 'd';
+            PiecePlace(DarkKnight2.x, DarkKnight2.y, DarkKnight2);
+
+            Piece DarkBishop1 = new Bishop();
+            DarkBishop1.x = Randomizer.ChooseNumberThenRemove(ref numbers);
+            DarkBishop1.y = 0;
+            DarkBishop1.name = 'B';
+            DarkBishop1.color = 'd';
+            PiecePlace(DarkBishop1.x, DarkBishop1.y, DarkBishop1);
+
+            Piece DarkBishop2 = new Bishop();
+            DarkBishop2.x = Randomizer.ChooseNumberThenRemove(ref numbers);
+            DarkBishop2.y = 0;
+            DarkBishop2.name = 'B';
+            DarkBishop2.color = 'd';
+            PiecePlace(DarkBishop2.x, DarkBishop2.y, DarkBishop2);
+
+            for (int i = 0; i < 8; i++)
+            {
+                Piece DarkPawn = new Pawn()
+                {
+                    x = i,
+                    y = 1,
+                    name = 'P',
+                    color = 'd'
+                };
+                PiecePlace(DarkPawn.x, DarkPawn.y, DarkPawn);
+            }
+
+            //Light Pieces
+            Piece LightKing = new King();
+            LightKing.x = DarkKing.x;
+            LightKing.y = 7;
+            LightKing.name = 'k';
+            LightKing.color = 'l';
+            PiecePlace(LightKing.x, LightKing.y, LightKing);
+
+            Piece LightQueen = new Queen();
+            LightQueen.x = DarkQueen.x;
+            LightQueen.y = 7;
+            LightQueen.name = 'q';
+            LightQueen.color = 'l';
+            PiecePlace(LightQueen.x, LightQueen.y, LightQueen);
+
+            Piece LightKnight1 = new Knight();
+            LightKnight1.x = DarkKnight1.x;
+            LightKnight1.y = 7;
+            LightKnight1.name = 'n';
+            LightKnight1.color = 'l';
+            PiecePlace(LightKnight1.x, LightKnight1.y, LightKnight1);
+
+            Piece LightKnight2 = new Knight();
+            LightKnight2.x = DarkKnight2.x;
+            LightKnight2.y = 7;
+            LightKnight2.name = 'n';
+            LightKnight2.color = 'l';
+            PiecePlace(LightKnight2.x, LightKnight2.y, LightKnight2);
+
+            Piece LightRook1 = new Rook();
+            LightRook1.x = DarkRook1.x;
+            LightRook1.y = 7;
+            LightRook1.name = 'r';
+            LightRook1.color = 'l';
+            PiecePlace(LightRook1.x, LightRook1.y, LightRook1);
+
+            Piece LightRook2 = new Rook();
+            LightRook2.x = DarkRook2.x;
+            LightRook2.y = 7;
+            LightRook2.name = 'r';
+            LightRook2.color = 'l';
+            PiecePlace(LightRook2.x, LightRook2.y, LightRook2);
+
+            Piece LightBishop1 = new Bishop();
+            LightBishop1.x = DarkBishop1.x;
+            LightBishop1.y = 7;
+            LightBishop1.name = 'b';
+            LightBishop1.color = 'l';
+            PiecePlace(LightBishop1.x, LightBishop1.y, LightBishop1);
+
+            Piece LightBishop2 = new Bishop();
+            LightBishop2.x = DarkBishop2.x;
+            LightBishop2.y = 7;
+            LightBishop2.name = 'b';
+            LightBishop2.color = 'l';
+            PiecePlace(LightBishop2.x, LightBishop2.y, LightBishop2);
+            for (int i = 0; i < 8; i++)
+            {
+                Piece LightPawn = new Pawn()
+                {
+                    x = i,
+                    y = 6,
+                    name = 'p',
+                    color = 'l'
+                };
+                PiecePlace(LightPawn.x, LightPawn.y, LightPawn);
+            }            
         }
 
         public static int GetAbsValue(int num1, int num2) // A method used to get the absolute value of two numbers to make logic simplier.

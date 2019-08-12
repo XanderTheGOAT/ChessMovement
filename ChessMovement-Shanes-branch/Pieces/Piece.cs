@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChessMovement
 {
-    class Piece
+    public class Piece
     {
         Util util = new Util();
 
