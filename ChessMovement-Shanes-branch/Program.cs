@@ -22,7 +22,7 @@ namespace ChessMovement
                 case 2:
                     Menu.LoadGame(args);
                     break;
-                case 0:
+                default:
                     break;
             }
         }
