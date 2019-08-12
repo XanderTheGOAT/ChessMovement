@@ -407,7 +407,7 @@ namespace ChessMovement
                     }
                 }
             }
-            Console.ReadLine();
+            //Console.ReadLine();
         }
 
         public bool CheckColor(char c)
@@ -462,7 +462,7 @@ namespace ChessMovement
                     {
                         string atemp = ("The space at those cordinates on the board is null");
                         PrintBoard(atemp);
-                        Console.ReadLine();
+                        //Console.ReadLine();
                     }
                     else
                     {
@@ -480,7 +480,7 @@ namespace ChessMovement
                         {
                             string temp = ("Invalid move: It is currently the other players turn.");
                             PrintBoard(temp);
-                            Console.ReadKey();
+                            //Console.ReadKey();
                         }
                     }
                 }
@@ -496,7 +496,7 @@ namespace ChessMovement
                     if (p == null)
                     {
                         Console.WriteLine("The space at those cordinates on the board is null");
-                        Console.ReadLine();
+                        //Console.ReadLine();
                     }
                     else
                     {
@@ -514,7 +514,7 @@ namespace ChessMovement
                         {
                             string temp = ("Invalid move: It is currently the other players turn.");
                             PrintBoard(temp);
-                            Console.ReadKey();
+                            //Console.ReadKey();
                         }
                     }
 
