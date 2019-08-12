@@ -47,19 +47,19 @@ namespace ChessMovement
             DarkKnight2.color = 'd';
             PiecePlace(DarkKnight2.x, DarkKnight2.y, DarkKnight2);
 
-            Piece darkRook1 = new Rook();
-            darkRook1.x = 0;
-            darkRook1.y = 0;
-            darkRook1.name = 'R';
-            darkRook1.color = 'd';
-            PiecePlace(darkRook1.x, darkRook1.y, darkRook1);
+            Piece DarkRook1 = new Rook();
+            DarkRook1.x = 0;
+            DarkRook1.y = 0;
+            DarkRook1.name = 'R';
+            DarkRook1.color = 'd';
+            PiecePlace(DarkRook1.x, DarkRook1.y, DarkRook1);
 
-            Piece darkrook2 = new Rook();
-            darkrook2.x = 7;
-            darkrook2.y = 0;
-            darkrook2.name = 'R';
-            darkrook2.color = 'd';
-            PiecePlace(darkrook2.x, darkrook2.y, darkrook2);
+            Piece DarkRook2 = new Rook();
+            DarkRook2.x = 7;
+            DarkRook2.y = 0;
+            DarkRook2.name = 'R';
+            DarkRook2.color = 'd';
+            PiecePlace(DarkRook2.x, DarkRook2.y, DarkRook2);
 
             Piece DarkBishop1 = new Bishop();
             DarkBishop1.x = 2;
@@ -275,7 +275,7 @@ namespace ChessMovement
             PiecePlace(LightPawn8.x, LightPawn8.y, LightPawn8);
             PrintBoard(null);
         }
-        public static int getAbsValue(int num1, int num2) // A method used to get the absolute value of two numbers to make logic simplier.
+        public static int GetAbsValue(int num1, int num2) // A method used to get the absolute value of two numbers to make logic simplier.
         {
             int result = 0;
             if (num1 > num2)
@@ -291,7 +291,7 @@ namespace ChessMovement
 
         static char c;
 
-        public void allvalidmoves(Piece[,] board)
+        public void AllValidMoves(Piece[,] board)
         {
             for (int i = 0; i < 8; i++)
             {
@@ -300,14 +300,14 @@ namespace ChessMovement
                     if (board[i, j] != null && lightPlayerTurn == true)
                     {
                         c = board[i, j].color;
-                        if (checkcolor(c) == true)
+                        if (CheckColor(c) == true)
                             Console.WriteLine($"{board[i, j].name}{board[i, j].color}: {board[i, j].x}, {board[i, j].y}");
                     }
                     else if (board[i, j] != null && lightPlayerTurn == false)
                     {
                         c = board[i, j].color;
 
-                        if (checkcolor(c) == false)
+                        if (CheckColor(c) == false)
                             Console.WriteLine($"{board[i, j].name}{board[i, j].color}: {board[i, j].x}, {board[i, j].y}");
                     }
                 }
@@ -315,7 +315,7 @@ namespace ChessMovement
             Console.ReadLine();
         }
 
-        public bool checkcolor(char c)
+        public bool CheckColor(char c)
         {
             if (c.Equals('l'))
             {
@@ -397,11 +397,11 @@ namespace ChessMovement
                                     if (lightPlayerTurn == true && p.color == 'l')
                                     {
                                         //lightplayer
-                                        pieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, Line, p.color);
+                                        PieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, Line, p.color);
                                     }
                                     else if (lightPlayerTurn == false && p.color == 'd')
                                     {
-                                        pieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, Line, p.color);
+                                        PieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, Line, p.color);
                                         //darkplayer
                                     }
                                     else
@@ -431,11 +431,11 @@ namespace ChessMovement
                                     if (lightPlayerTurn == true && p.color == 'l')
                                     {
                                         //lightplayer
-                                        pieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, Line, p.color);
+                                        PieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, Line, p.color);
                                     }
                                     else if (lightPlayerTurn == false && p.color == 'd')
                                     {
-                                        pieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, Line, p.color);
+                                        PieceMove(StartX, 8 - StartY, EndX, 8 - EndY, p, Line, p.color);
                                         //darkplayer
                                     }
                                     else
@@ -475,7 +475,7 @@ namespace ChessMovement
             board[x, y] = piece; //Puts the piece at the desired location
         }
 
-        public void pieceMove(int startX, int startY, int endX, int endY, Piece piece, string Move, char Color) //Moves the Piece
+        public void PieceMove(int startX, int startY, int endX, int endY, Piece piece, string Move, char Color) //Moves the Piece
         {
             lastPieceMovedColor = Color;
             //Checks if the location has a piece to move
@@ -484,7 +484,7 @@ namespace ChessMovement
 
                 if (piece.IsValidTest(piece, endX, endY))
                 {
-                    if (checkLastPlayerMovement() == 0)
+                    if (CheckLastPlayerMovement() == 0)
                     {
                         lightPlayerTurn = true;
                     }
@@ -572,7 +572,7 @@ namespace ChessMovement
 
         //if 0 is returned then light player's turn
         //if 1 is returned then dark player's turn
-        public int checkLastPlayerMovement()
+        public int CheckLastPlayerMovement()
         {
             if (lastPieceMovedColor == 'd')
             {
