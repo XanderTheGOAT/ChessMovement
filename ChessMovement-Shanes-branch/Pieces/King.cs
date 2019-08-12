@@ -13,8 +13,8 @@ namespace ChessMovement
         {
             bool result = false;
 
-            p.AbsX = Util.getAbsValue(p.x, endX);
-            p.AbsY = Util.getAbsValue(p.y, endY);
+            p.AbsX = Util.GetAbsValue(p.x, endX);
+            p.AbsY = Util.GetAbsValue(p.y, endY);
             Util util = new Util();
             Piece[,] temp = util.GetBoard();
             if ((p.AbsX <= 1 && p.AbsY <= 1) && (0 <= endX && endX <= 7) && (0 <= endY && endY <= 7))

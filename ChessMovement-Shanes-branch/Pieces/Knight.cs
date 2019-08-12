@@ -12,8 +12,8 @@ namespace ChessMovement
         public override bool IsValidTest(Piece p, int endX, int endY)
         {
             bool result = false;
-            p.AbsX = Util.getAbsValue(p.x, endX);
-            p.AbsY = Util.getAbsValue(p.y, endY);
+            p.AbsX = Util.GetAbsValue(p.x, endX);
+            p.AbsY = Util.GetAbsValue(p.y, endY);
             Util util = new Util();
             Piece[,] temp = util.GetBoard();
             if ((p.AbsX == 1 && p.AbsY == 2) || (p.AbsX == 2 && p.AbsY == 1) && (endX >= 0 && endX <= 7) && (endY >= 0 && endY <= 7))
