@@ -215,6 +215,26 @@ namespace ChessMovement
             List<int> numbers = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7 };
 
             //Dark Pieces
+            Piece DarkBishop1 = new Bishop();
+            int value = numbers[new Random().Next(7)];
+            value = value % 2 == 0 ? value : value+1;
+            numbers.Remove(value);
+            DarkBishop1.x = value;
+            DarkBishop1.y = 0;
+            DarkBishop1.name = 'B';
+            DarkBishop1.color = 'd';
+            PiecePlace(DarkBishop1.x, DarkBishop1.y, DarkBishop1);
+
+            Piece DarkBishop2 = new Bishop();
+            value = numbers[new Random().Next(6)];
+            value = value % 2 == 0 ? value+1 : value;
+            numbers.Remove(value);
+            DarkBishop2.x = value;
+            DarkBishop2.y = 0;
+            DarkBishop2.name = 'B';
+            DarkBishop2.color = 'd';
+            PiecePlace(DarkBishop2.x, DarkBishop2.y, DarkBishop2);
+
             Rook DarkRook1 = new Rook();
             DarkRook1.x = Randomizer.ChooseNumberThenRemove(ref numbers);
             DarkRook1.y = 0;
@@ -268,20 +288,6 @@ namespace ChessMovement
             DarkKnight2.name = 'N';
             DarkKnight2.color = 'd';
             PiecePlace(DarkKnight2.x, DarkKnight2.y, DarkKnight2);
-
-            Piece DarkBishop1 = new Bishop();
-            DarkBishop1.x = Randomizer.ChooseNumberThenRemove(ref numbers);
-            DarkBishop1.y = 0;
-            DarkBishop1.name = 'B';
-            DarkBishop1.color = 'd';
-            PiecePlace(DarkBishop1.x, DarkBishop1.y, DarkBishop1);
-
-            Piece DarkBishop2 = new Bishop();
-            DarkBishop2.x = Randomizer.ChooseNumberThenRemove(ref numbers);
-            DarkBishop2.y = 0;
-            DarkBishop2.name = 'B';
-            DarkBishop2.color = 'd';
-            PiecePlace(DarkBishop2.x, DarkBishop2.y, DarkBishop2);
 
             for (int i = 0; i < 8; i++)
             {
