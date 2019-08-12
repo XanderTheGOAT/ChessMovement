@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CIO">
+      <HintPath>..\..\..\..\..\Downloads\CIO.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Menu.cs" />
     <Compile Include="Pieces\Bishop.cs" />
     <Compile Include="Pieces\King.cs" />
     <Compile Include="Pieces\Knight.cs" />
